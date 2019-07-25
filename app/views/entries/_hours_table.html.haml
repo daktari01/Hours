@@ -16,7 +16,10 @@
           %div.weekday= t("weekdays." + entry.date.strftime('%A').downcase)
           = I18n.l (entry.date)
         %td.project= link_to entry.project.name, entry.project
-        %td.hours.center= entry.value
+        - if (entry.value/24) >= 1
+          %td.hours.center= "#{entry.value/24} days, #{entry.value%24} hours"
+        - else
+          %td.hours.center= "#{entry.value} hours"
         %td.category.hide-for-mobile
           %span.color{:style => "background-color:#{entry.category.name.pastel_color};"}
           = entry.category.name
